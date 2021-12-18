@@ -34,10 +34,13 @@ jobs: # basic units of work in a run
             CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
             CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
 
+
+
+
           # store the results of our tests in the $TEST_RESULTS directory
-          command: |
-            PACKAGE_NAMES=$(go list ./... | circleci tests split --split-by=timings --timings-type=classname)
-            gotestsum --junitfile ${TEST_RESULTS}/gotestsum-report.xml -- $PACKAGE_NAMES
+          # command: |
+          #   PACKAGE_NAMES=$(go list ./... | circleci tests split --split-by=timings --timings-type=classname)
+          #   gotestsum --junitfile ${TEST_RESULTS}/gotestsum-report.xml -- $PACKAGE_NAMES
 
       - run: make # pull and build dependencies for the project
 
@@ -46,14 +49,16 @@ jobs: # basic units of work in a run
           paths:
             - "/go/pkg/mod"
 
+      # - run:
+      #     name: Start service
+      #     environment:
+      #       CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
+      #       CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
+      #     command: ./workdir/contacts
+      #     background: true # keep service running and proceed to next step
       - run:
-          name: Start service
-          environment:
-            CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
-          command: ./workdir/contacts
-          background: true # keep service running and proceed to next step
-
+          name: run hello world
+          command: go run test.go
       - run:
           name: Validate service is working
           command: |

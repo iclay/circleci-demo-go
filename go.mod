@@ -1,5 +1,7 @@
 module github.com/CircleCI-Public/circleci-demo-go
 
+go 1.14
+
 require (
 	github.com/cznic/ql v1.2.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
