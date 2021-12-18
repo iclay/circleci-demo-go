@@ -58,7 +58,7 @@ jobs: # basic units of work in a run
       #     background: true # keep service running and proceed to next step
       - run:
           name: run hello world
-          command: go run test.go
+          comand: go run test.go
       - run:
           name: Validate service is working
           command: |
