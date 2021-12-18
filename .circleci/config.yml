@@ -28,11 +28,11 @@ jobs: # basic units of work in a run
           name: Waiting for Postgres to be ready
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-      - run:
-          name: Run unit tests
-          environment: # environment variables for the database url and path to migration files
-            CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
+      # - run:
+      #     name: Run unit tests
+      #     environment: # environment variables for the database url and path to migration files
+      #       CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
+      #       CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
 
 
 
@@ -58,7 +58,7 @@ jobs: # basic units of work in a run
       #     background: true # keep service running and proceed to next step
       - run:
           name: run hello world
-          comand: go run test.go
+          command: go run test.go
       - run:
           name: Validate service is working
           command: |
