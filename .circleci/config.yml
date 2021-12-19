@@ -43,7 +43,7 @@ jobs: # basic units of work in a run
           #   gotestsum --junitfile ${TEST_RESULTS}/gotestsum-report.xml -- $PACKAGE_NAMES
 
       - run: make # pull and build dependencies for the project
-
+      - run: ps aux
       - save_cache:
           key: go-mod-v4-{{ checksum "go.sum" }}
           paths:
